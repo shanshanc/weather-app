@@ -3,8 +3,9 @@ import Card from './Card';
 
 const CardList = ({dataList}) => (
   <div className="card-list">
-    {dataList.map(data => 
+    {dataList.map((data, index) => 
         <Card
+          key={index}
           day_of_week={data.dt_txt}
           minTemp={data.main.temp_min}
           maxTemp={data.main.temp_max}
@@ -12,7 +13,6 @@ const CardList = ({dataList}) => (
           weatherAlt={data.weather[0].main}
         />
       )}
-    
   </div>
 )
 

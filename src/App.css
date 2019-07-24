@@ -3,13 +3,13 @@
 }
 
 .card-list {
-  /* border: 1px dotted black; */
+  border: 1px dotted black;
   display: flex;
   justify-content: center;
 }
 
 .card {
-  /* border: 1px dotted grey; */
+  border: 1px dotted grey;
   display: flex;
   flex-direction: column;
 }
