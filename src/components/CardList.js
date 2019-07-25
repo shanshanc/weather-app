@@ -1,19 +1,22 @@
 import React from 'react';
 import Card from './Card';
 
-const CardList = ({dataList}) => (
-  <div className="card-list">
-    {dataList.map((data, index) => 
-        <Card
-          key={index}
-          day_of_week={data.dt_txt}
-          minTemp={data.main.temp_min}
-          maxTemp={data.main.temp_max}
-          weatherImage={data.weather[0].icon}
-          weatherAlt={data.weather[0].main}
-        />
-      )}
-  </div>
-)
+const CardList = ({ dailyList }) => {
+  if (!dailyList) return <div>updating...</div>;
+  return (
+    <div className="card-list">
+      {dailyList.map((data, index) => 
+          <Card
+            key={index}
+            day_of_week={data.date}
+            minTemp={data.minTemp}
+            maxTemp={data.maxTemp}
+            weatherImage={data.icon.slice(0, 2)}
+            weatherAlt={data.alt}
+          />
+        )}
+    </div>
+  )
+}
 
 export default CardList;
