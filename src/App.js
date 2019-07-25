@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Route, Switch } from 'react-router-dom';
 
 import sampleWeatherData from './private/weatherData';
 import { OPEN_WEATHER_API_KEY } from './private/openWeatherAPI';
 
 import CardList from './components/CardList';
+import ThreeHourList from './components/ThreeHourList';
 import './App.css';
 
-const SAMPLE_DATA = sampleWeatherData
+const INITIAL_DATA = sampleWeatherData;
 const BASE_URL = 'http://api.openweathermap.org/data/2.5/forecast?id=1668341&units=metric&appid='
 
 function App() {
-  const [data, setData] = useState(SAMPLE_DATA);
+  const [data, setData] = useState(INITIAL_DATA);
 
   // a helper function to get today's date
   const getToday = () => {
@@ -76,7 +78,10 @@ function App() {
   return (
     <div className="App">
       <h2>5-day weather forecast - {data.city.name} (°C)</h2>
-      <CardList dailyList={data.daily}/>
+    <Switch>
+      <Route exact path="/" render={() => <CardList dailyList={data.daily} />} />
+      <Route path="/three-hour" component={ThreeHourList} />
+    </Switch>
     </div>
   );
 }
