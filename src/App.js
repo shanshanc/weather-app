@@ -75,7 +75,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>5-day weather forecast - {data.city.name}</h2>
+      <h2>5-day weather forecast - {data.city.name} (°C)</h2>
       <CardList dailyList={data.daily}/>
     </div>
   );
