@@ -2,6 +2,34 @@
   text-align: center;
 }
 
+.nav {
+  width: 50vw;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.nav li {
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px 10px;
+  font-size: 1.4rem;
+}
+
+.nav li a {
+  text-decoration: none;
+}
+
+.nav li:hover {
+  background-color: white;
+}
+
+.nav li:active {
+  background-color: #d3d3d3;
+}
+
 .card-list {
   display: flex;
   justify-content: center;

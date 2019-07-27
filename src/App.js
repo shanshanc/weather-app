@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Link } from 'react-router-dom';
 
 import sampleWeatherData from './private/weatherData';
 import { OPEN_WEATHER_API_KEY } from './private/openWeatherAPI';
@@ -79,8 +79,15 @@ function App() {
 
   return (
     <div className="App">
-      <h2>5-day weather forecast - {data.city.name} (°C)</h2>
-      
+      <h1>5-day weather forecast - {data.city.name} (°C)</h1>
+      <ul className="nav">
+        <li>
+          <Link to="/">Daily</Link>
+        </li>
+        <li>
+        <Link to="/breakdown">Hourly</Link>
+        </li>
+      </ul>
       <Switch>
         <Route exact path="/" render={() => <CardList dailyList={data.daily} />} />
         <Route path="/breakdown" render={() => <BreakdownList list={data.daily}/>} />
