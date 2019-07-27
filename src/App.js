@@ -79,7 +79,7 @@ function App() {
 
   return (
     <div className="App">
-      <h1>5-day weather forecast - {data.city.name} (°C)</h1>
+      {/* <h1>5-day weather forecast - {data.city.name} (°C)</h1> */}
       <ul className="nav">
         <li>
           <Link to="/">Daily</Link>
@@ -89,8 +89,8 @@ function App() {
         </li>
       </ul>
       <Switch>
-        <Route exact path="/" render={() => <CardList dailyList={data.daily} />} />
-        <Route path="/breakdown" render={() => <BreakdownList list={data.daily}/>} />
+        <Route exact path="/" render={() => <CardList dailyList={data.daily} city={data.city}/>} />
+        <Route path="/breakdown" render={() => <BreakdownList list={data.daily} city={data.city}/>} />
       </Switch>
     </div>
   );
