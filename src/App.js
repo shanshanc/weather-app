@@ -6,7 +6,7 @@ import sampleWeatherData from './private/weatherData';
 import { OPEN_WEATHER_API_KEY } from './private/openWeatherAPI';
 
 import CardList from './components/CardList';
-import ThreeHourList from './components/ThreeHourList';
+import BreakdownList from './components/BreakdownList';
 import './App.css';
 
 const INITIAL_DATA = sampleWeatherData;
@@ -20,9 +20,8 @@ function App() {
     let today = new Date();
     const dd = String(today.getDate()).padStart(2, '0');
     const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-    const yyyy = today.getFullYear();
-    return yyyy-mm-dd;
-
+    const yyyy = String(today.getFullYear());
+    return yyyy + '-' + mm + '-' + dd;
   }
 
   useEffect(() => {
@@ -49,10 +48,13 @@ function App() {
                 minTemp: record.main.temp_min,
                 maxTemp: record.main.temp_max,
                 icon: record.weather[0].icon,
-                alt: record.weather[0].main
+                alt: record.weather[0].main,
+                records: [record],
+                today: today
               })
             } else {
               // get daily min/max temperature, use mid-day icon for the forecast
+              existingRecord.records.push(record);
               if (record.main.temp_min < existingRecord.minTemp) existingRecord.minTemp = record.main.temp_min;
               if (record.main.temp_max > existingRecord.maxTemp) existingRecord.maxTemp = record.main.temp_max;
               if (existingRecord.date !== today && currentHour === '12:00:00') {
@@ -65,6 +67,7 @@ function App() {
 
           // append the daily records and update state
           response.data.daily = daily;
+          console.log(response.data);
           setData(response.data);
         })
         .catch(function (error) {
@@ -74,14 +77,14 @@ function App() {
     fetchData();
   }, []);
 
-
   return (
     <div className="App">
       <h2>5-day weather forecast - {data.city.name} (°C)</h2>
-    <Switch>
-      <Route exact path="/" render={() => <CardList dailyList={data.daily} />} />
-      <Route path="/three-hour" component={ThreeHourList} />
-    </Switch>
+      
+      <Switch>
+        <Route exact path="/" render={() => <CardList dailyList={data.daily} />} />
+        <Route path="/breakdown" render={() => <BreakdownList list={data.daily}/>} />
+      </Switch>
     </div>
   );
 }

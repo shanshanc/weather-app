@@ -12,3 +12,38 @@
   flex-direction: column;
   margin: 10px;
 }
+
+.breakdown-list {
+  width: 50vw;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.date-box {
+  border: 1px solid transparent;
+  background-color: lightgray;
+}
+
+.breakdown-box {
+  display: flex;
+  justify-content: center;
+  border: 1px solid transparent;
+  border-bottom-color: lightgray;
+}
+
+.box-temp, .box-image, .box-detail {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.box-detail span {
+  margin: 5px;
+}
+
+.round {
+  border-radius: 5px;
+  background-color: #696969;
+  color: whitesmoke;
+}
