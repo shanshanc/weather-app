@@ -1,19 +1,21 @@
 import React from 'react';
-import Card from './Card';
 
 const CardList = ({ dailyList }) => {
   if (!dailyList) return <div>updating...</div>;
   return (
     <div className="card-list">
       {dailyList.map((data, index) => 
-          <Card
-            key={index}
-            day_of_week={data.date}
-            minTemp={data.minTemp}
-            maxTemp={data.maxTemp}
-            weatherImage={data.icon.slice(0, 2)}
-            weatherAlt={data.alt}
-          />
+        <div key={index} className="card">
+          <div>{data.date}</div>
+          <div>
+            <img src={`http://openweathermap.org/img/wn/${data.icon.slice(0, 2)}d@2x.png`} alt={data.alt}/>
+          </div>
+          <div className="card-temp">
+            <span>{parseInt(data.minTemp)}</span>
+            {' - '} 
+            <span>{parseInt(data.maxTemp)}</span>
+          </div>
+        </div>
         )}
     </div>
   )
